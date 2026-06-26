@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Employees</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand-box">
+                    <div class="brand-logo">N</div>
+                    <div>
+                        <h2>NTPC BD Portal</h2>
+                        <p>Admin Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">D</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="employees.html" class="nav-item active">
+                    <span class="nav-icon">E</span>
+                    <span>Employees</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <span class="nav-icon">U</span>
+                    <span>Submit Data</span>
+                </a>
+                <a href="weekly_reports.html" class="nav-item">
+                    <span class="nav-icon">W</span>
+                    <span>Weekly Reports</span>
+                </a>
+                <a href="monthly_reports.html" class="nav-item">
+                    <span class="nav-icon">M</span>
+                    <span>Monthly Reports</span>
+                </a>
+                <a href="review.html" class="nav-item">
+                    <span class="nav-icon">R</span>
+                    <span>Review / Analytics</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Employee Management</h1>
+                    <p>Add employees, edit access, approve/reject accounts, and assign companies handled by each employee.</p>
+                </div>
+                <div class="admin-chip">
+                    <div class="admin-avatar" id="adminInitial">A</div>
+                    <div>
+                        <h4 id="adminName">Admin</h4>
+                        <p>Access management</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- STATS -->
+            <section class="stats-grid review-stats">
+                <div class="stat-card green">
+                    <div class="stat-top"><span>Total Employees</span></div>
+                    <h2 id="employeeTotalCount">0</h2>
+                    <p>All employee accounts in the portal</p>
+                </div>
+
+                <div class="stat-card blue">
+                    <div class="stat-top"><span>Approved</span></div>
+                    <h2 id="employeeApprovedCount">0</h2>
+                    <p>Employees who can log in and submit data</p>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-top"><span>Pending</span></div>
+                    <h2 id="employeePendingCount">0</h2>
+                    <p>Employees waiting for admin approval</p>
+                </div>
+
+                <div class="stat-card red">
+                    <div class="stat-top"><span>Rejected</span></div>
+                    <h2 id="employeeRejectedCount">0</h2>
+                    <p>Rejected / blocked employee accounts</p>
+                </div>
+            </section>
+
+            <section class="report-workspace">
+                <!-- LEFT: EMPLOYEE FORM -->
+                <form id="employeeForm" class="panel-card report-form">
+                    <div class="panel-header">
+                        <h3 id="employeeFormTitle">Add Employee</h3>
+                        <div class="form-actions">
+                            <button class="mini-btn" type="button" id="resetEmployeeBtn">Clear</button>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="employeeId" />
+
+                    <div class="form-grid">
+                        <label>
+                            Full Name
+                            <input id="employeeFullName" type="text" placeholder="Enter employee full name" required />
+                        </label>
+
+                        <label>
+                            Username
+                            <input id="employeeUsername" type="text" placeholder="Enter username" required />
+                        </label>
+
+                        <label>
+                            Password
+                            <input id="employeePassword" type="text" placeholder="Enter password" />
+                        </label>
+
+                        <label>
+                            Role
+                            <select id="employeeRole">
+                                <option value="EMPLOYEE">EMPLOYEE</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Status
+                            <select id="employeeStatus">
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="REJECTED">REJECTED</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="primary-btn" type="submit">Save Employee</button>
+                    </div>
+
+                    <p class="inline-message" id="employeeMessage"></p>
+                </form>
+
+                <!-- RIGHT: QUICK NOTES -->
+                <section class="panel-card">
+                    <div class="panel-header">
+                        <h3>Employee Access Rules</h3>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>1. Only approved employees can log in</h4>
+                            <p>If status is APPROVED, the employee can log in and use the portal. PENDING / REJECTED employees should not get normal access.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>2. Companies are assigned employee-wise</h4>
+                            <p>Each employee should only see the companies assigned to them in the data submission page.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>3. Admin can make another admin</h4>
+                            <p>If role is ADMIN, that user gets admin-side access like employee management, review, and reports.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>4. Password can be changed later</h4>
+                            <p>While editing, leave password blank if you do not want to change the employee password.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- EMPLOYEE TABLE -->
+            <section class="panel-card">
+                <div class="panel-header">
+                    <h3>All Employees</h3>
+                    <button class="mini-btn" id="reloadEmployeesBtn" type="button">Reload</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Companies</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeesTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- COMPANY ASSIGNMENT MODAL -->
+    <div id="companyAssignmentModal" class="modal-overlay hidden">
+        <div class="modal-card large-modal">
+            <div class="panel-header">
+                <div>
+                    <h3>Assign Companies</h3>
+                    <p id="assignmentEmployeeName">Employee</p>
+                </div>
+                <button class="mini-btn" type="button" onclick="closeCompanyAssignmentModal()">Close</button>
+            </div>
+
+            <input type="hidden" id="assignmentEmployeeId" />
+
+            <section class="modal-section">
+                <h4 style="margin-bottom: 12px;">Assigned Companies</h4>
+                <div id="assignmentCompanyList" class="assignment-list">
+                    <p class="muted-text">Loading assigned companies...</p>
+                </div>
+            </section>
+
+            <section class="modal-section" style="margin-top: 18px;">
+                <h4 style="margin-bottom: 12px;">Add New Company Assignment</h4>
+
+                <form id="assignmentCompanyForm" class="report-form">
+                    <div class="form-grid">
+                        <label>
+                            Company Name
+                            <input id="assignmentCompanyName" type="text" placeholder="Enter company name" required />
+                        </label>
+
+                        <label>
+                            Company Type
+                            <input id="assignmentCompanyType" type="text" placeholder="JV / PSU / Private / Subsidiary / etc." />
+                        </label>
+
+                        <label class="full-span">
+                            Description
+                            <textarea id="assignmentCompanyDescription" rows="4" placeholder="Optional company / project description"></textarea>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="primary-btn" type="submit">Assign Company</button>
+                    </div>
+
+                    <p class="inline-message" id="assignmentMessage"></p>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/employees.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const assignmentForm = document.getElementById("assignmentCompanyForm");
+            if (assignmentForm) {
+                assignmentForm.addEventListener("submit", addCompanyAssignment);
+            }
+        });
+    </script>
+</body>
+</html>

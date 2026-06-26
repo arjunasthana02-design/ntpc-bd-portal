@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand-box">
+                    <div class="brand-logo">N</div>
+                    <div>
+                        <h2>NTPC BD Portal</h2>
+                        <p>Admin Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="nav-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="employees.html" class="nav-item">
+                    <span class="nav-icon">👨‍💼</span>
+                    <span>Employees</span>
+                </a>
+
+                <a href="upload.html" class="nav-item">
+                    <span class="nav-icon">📤</span>
+                    <span>Submit Data</span>
+                </a>
+
+                <a href="bd_dashboard.html" class="nav-item">
+                    <span class="nav-icon">B</span>
+                    <span>BD Dashboard</span>
+                </a>
+
+                <a href="raw_documents.html" class="nav-item">
+                    <span class="nav-icon">R</span>
+                    <span>Raw Data</span>
+                </a>
+
+                <a href="ai_training.html" class="nav-item">
+                    <span class="nav-icon">AI</span>
+                    <span>AI Training</span>
+                </a>
+
+                <a href="weekly_reports.html" class="nav-item">
+                    <span class="nav-icon">📑</span>
+                    <span>Weekly Reports</span>
+                </a>
+
+                <a href="monthly_reports.html" class="nav-item">
+                    <span class="nav-icon">M</span>
+                    <span>Monthly Reports</span>
+                </a>
+
+                <a href="review.html" class="nav-item">
+                    <span class="nav-icon">🧠</span>
+                    <span>Review / Analytics</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>NTPC BD Portal - Employee Access, Data Submission & Weekly Report Monitoring</p>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="admin-chip">
+                        <div class="admin-avatar">A</div>
+                        <div>
+                            <h4>Admin</h4>
+                            <p>System Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- HERO -->
+            <section class="hero-panel">
+                <div class="hero-left">
+                    <h2>Employee Data Submission & Weekly Report Management</h2>
+                    <p>
+                        Create employee access, manage submissions, track uploaded data,
+                        and generate weekly reports from a centralized NTPC BD admin portal.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="employees.html" class="primary-btn">Manage Employees</a>
+                        <a href="weekly_reports.html" class="secondary-btn">Open Weekly Reports</a>
+                        <a href="monthly_reports.html" class="secondary-btn">Open Monthly Reports</a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-badge">
+                        <span>Admin Workspace</span>
+                        <h3>NTPC Business Development Reporting Portal</h3>
+                        <p>
+                            Centralized employee access management, data submission tracking
+                            and weekly reporting workflow.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STATS -->
+            <section class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-top">
+                        <span>Total Employees</span>
+                        <span class="stat-icon">👨‍💼</span>
+                    </div>
+                    <h2 id="totalEmployees">0</h2>
+                    <p>Total employee accounts created by admin</p>
+                </div>
+
+                <div class="stat-card purple">
+                    <div class="stat-top">
+                        <span>Active Employees</span>
+                        <span class="stat-icon">🟢</span>
+                    </div>
+                    <h2 id="activeEmployees">0</h2>
+                    <p>Employees currently active in the system</p>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-top">
+                        <span>Data Submissions</span>
+                        <span class="stat-icon">📤</span>
+                    </div>
+                    <h2 id="totalSubmissions">0</h2>
+                    <p>Total uploaded employee data/documents</p>
+                </div>
+
+                <div class="stat-card red">
+                    <div class="stat-top">
+                        <span>Pending Reviews</span>
+                        <span class="stat-icon">⏳</span>
+                    </div>
+                    <h2 id="pendingReviews">0</h2>
+                    <p>Submissions pending verification or review</p>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-top">
+                        <span>Weekly Reports</span>
+                        <span class="stat-icon">📑</span>
+                    </div>
+                    <h2 id="weeklyReports">0</h2>
+                    <p>Total weekly reports generated from the system</p>
+                </div>
+
+                <div class="stat-card cyan">
+                    <div class="stat-top">
+                        <span>Reports This Week</span>
+                        <span class="stat-icon">📊</span>
+                    </div>
+                    <h2 id="reportsThisWeek">0</h2>
+                    <p>Weekly reports generated in the current week</p>
+                </div>
+            </section>
+
+            <!-- MAIN GRID -->
+            <section class="dashboard-grid">
+
+                <!-- LEFT SIDE -->
+                <div class="left-panel">
+
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Recent Employee Submissions</h3>
+                            <button class="mini-btn">View All</button>
+                        </div>
+
+                        <div class="table-wrapper">
+                            <table class="modern-table">
+                                <thead>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Submitted File / Data</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentSubmissionsTable">
+                                    <tr>
+                                        <td colspan="5" style="text-align:center; color:#64748b; padding: 22px;">
+                                            No employee submissions available yet
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Weekly Report Summary</h3>
+                        </div>
+
+                        <div class="summary-grid">
+                            <div class="summary-box">
+                                <h4>Total Reports</h4>
+                                <p id="summaryTotalReports">0 weekly reports generated so far.</p>
+                            </div>
+
+                            <div class="summary-box">
+                                <h4>Pending Submission Checks</h4>
+                                <p id="summaryPendingChecks">0 submissions are waiting for review.</p>
+                            </div>
+
+                            <div class="summary-box">
+                                <h4>Employee Access Status</h4>
+                                <p id="summaryEmployeeAccess">0 employee accounts currently configured.</p>
+                            </div>
+
+                            <div class="summary-box">
+                                <h4>Current Week Progress</h4>
+                                <p id="summaryWeekProgress">No weekly reporting activity available yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="right-panel">
+
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+
+                        <div class="quick-actions">
+                            <a href="employees.html" class="action-card">
+                                <div class="action-icon">➕</div>
+                                <div>
+                                    <h4>Add / Manage Employees</h4>
+                                    <p>Create employee access and control user accounts</p>
+                                </div>
+                            </a>
+
+                            <a href="upload.html" class="action-card">
+                                <div class="action-icon">📤</div>
+                                <div>
+                                    <h4>Submit Employee Data</h4>
+                                    <p>Upload employee files, reports or weekly input data</p>
+                                </div>
+                            </a>
+
+                            <a href="weekly_reports.html" class="action-card">
+                                <div class="action-icon">📑</div>
+                                <div>
+                                    <h4>Generate Weekly Reports</h4>
+                                    <p>Create and track weekly business development reports</p>
+                                </div>
+                            </a>
+
+                            <a href="monthly_reports.html" class="action-card">
+                                <div class="action-icon">M</div>
+                                <div>
+                                    <h4>Generate Monthly Reports</h4>
+                                    <p>Build monthly key activity reports using the approved format</p>
+                                </div>
+                            </a>
+
+                            <a href="review.html" class="action-card">
+                                <div class="action-icon">📈</div>
+                                <div>
+                                    <h4>Review Activity</h4>
+                                    <p>Monitor submissions, approvals and reporting status</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Admin Workflow</h3>
+                        </div>
+
+                        <ul class="highlight-list">
+                            <li>Admin creates employee login access.</li>
+                            <li>Employees log in and submit required weekly/business data.</li>
+                            <li>Submitted data is tracked and can be reviewed centrally.</li>
+                            <li>Weekly reports are generated from submitted information.</li>
+                            <li>Admin can monitor employee activity and report status from this dashboard.</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Portal Status</h3>
+                        </div>
+
+                        <div class="portal-status">
+                            <div class="status-line">
+                                <span>Admin Access Control</span>
+                                <span class="live-tag">Enabled</span>
+                            </div>
+                            <div class="status-line">
+                                <span>Employee Submission Portal</span>
+                                <span class="live-tag">Enabled</span>
+                            </div>
+                            <div class="status-line">
+                                <span>Weekly Reporting Module</span>
+                                <span class="live-tag warning-tag">In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

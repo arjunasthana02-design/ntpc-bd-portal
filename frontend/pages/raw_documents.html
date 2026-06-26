@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Raw Data Repository</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="brand-box"><div class="brand-logo">N</div><div><h2>NTPC BD Portal</h2><p>Knowledge Repository</p></div></div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span>D</span><span>Dashboard</span></a>
+                <a href="bd_dashboard.html" class="nav-item"><span>B</span><span>BD Dashboard</span></a>
+                <a href="upload.html" class="nav-item"><span>U</span><span>Submit Data</span></a>
+                <a href="raw_documents.html" class="nav-item active"><span>R</span><span>Raw Data</span></a>
+                <a href="ai_training.html" class="nav-item"><span>AI</span><span>AI Training</span></a>
+                <a href="weekly_reports.html" class="nav-item"><span>W</span><span>Weekly Reports</span></a>
+                <a href="monthly_reports.html" class="nav-item"><span>M</span><span>Monthly Reports</span></a>
+            </nav>
+            <div class="sidebar-footer"><button class="logout-btn" onclick="logout()">Logout</button></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Raw Data Repository</h1>
+                    <p>Search, open, edit, and download every submitted source document with extracted text and metadata.</p>
+                </div>
+            </header>
+
+            <section class="panel-card">
+                <div class="panel-header"><h3>Search Repository</h3><button class="mini-btn" id="rawSearchBtn">Search</button></div>
+                <div class="report-source-grid">
+                    <label>Keyword<input id="rawQ" placeholder="Company, project, topic, text"></label>
+                    <label>Company<input id="rawCompany" placeholder="Company"></label>
+                    <label>Project<input id="rawProject" placeholder="Project"></label>
+                    <label>Employee<input id="rawEmployee" placeholder="Submitted by"></label>
+                    <label>Business Avenue<input id="rawAvenue" placeholder="Avenue"></label>
+                    <label>Date From<input type="date" id="rawDateFrom"></label>
+                    <label>Date To<input type="date" id="rawDateTo"></label>
+                </div>
+            </section>
+
+            <section class="dashboard-grid repository-grid">
+                <div class="panel-card">
+                    <div class="panel-header"><h3>Submissions</h3><span class="muted-text" id="rawCount"></span></div>
+                    <div class="table-wrapper">
+                        <table class="modern-table">
+                            <thead><tr><th>Title</th><th>Company</th><th>Project</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="rawTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-card">
+                    <div class="panel-header"><h3>Document Viewer</h3><button class="mini-btn" id="rawSaveBtn">Auto-save Edit</button></div>
+                    <div id="rawMeta" class="muted-text">Select a submission to preview extracted text.</div>
+                    <div class="word-editor-shell compact-editor">
+                        <div id="rawEditor" class="word-page raw-page" contenteditable="true"></div>
+                    </div>
+                    <p class="inline-message" id="rawMessage"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/raw_documents.js"></script>
+</body>
+</html>

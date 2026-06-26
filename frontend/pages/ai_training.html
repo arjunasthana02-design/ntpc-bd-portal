@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - AI Training</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="brand-box"><div class="brand-logo">N</div><div><h2>NTPC BD Portal</h2><p>AI Training</p></div></div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span>D</span><span>Dashboard</span></a>
+                <a href="bd_dashboard.html" class="nav-item"><span>B</span><span>BD Dashboard</span></a>
+                <a href="raw_documents.html" class="nav-item"><span>R</span><span>Raw Data</span></a>
+                <a href="ai_training.html" class="nav-item active"><span>AI</span><span>AI Training</span></a>
+                <a href="weekly_reports.html" class="nav-item"><span>W</span><span>Weekly Reports</span></a>
+                <a href="monthly_reports.html" class="nav-item"><span>M</span><span>Monthly Reports</span></a>
+            </nav>
+            <div class="sidebar-footer"><button class="logout-btn" onclick="logout()">Logout</button></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>AI Training Center</h1>
+                    <p>Upload approved reports, templates, SOPs, guidelines, and reference material for grounded report generation.</p>
+                </div>
+            </header>
+
+            <section class="panel-card">
+                <div class="panel-header"><h3>Upload Training Material</h3></div>
+                <form id="trainingForm" class="report-form">
+                    <div class="report-source-grid">
+                        <label>Title<input id="trainingTitle" required></label>
+                        <label>Category
+                            <select id="trainingCategory">
+                                <option>Approved Report</option>
+                                <option>Weekly Report</option>
+                                <option>Monthly Report</option>
+                                <option>Report Template</option>
+                                <option>NTPC SOP</option>
+                                <option>BD Guideline</option>
+                                <option>Project Document</option>
+                                <option>Company Document</option>
+                                <option>Reference Material</option>
+                            </select>
+                        </label>
+                        <label>Company<input id="trainingCompany"></label>
+                        <label>Project<input id="trainingProject"></label>
+                        <label>Topic<input id="trainingTopic"></label>
+                        <label>Business Avenue<input id="trainingAvenue"></label>
+                        <label>File<input id="trainingFile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt" required></label>
+                    </div>
+                    <div class="form-actions"><button class="primary-btn" type="submit">Upload to AI Knowledge Base</button></div>
+                    <p id="trainingMessage" class="inline-message"></p>
+                </form>
+            </section>
+
+            <section class="panel-card">
+                <div class="panel-header"><h3>Knowledge Base</h3><button class="mini-btn" id="reloadTrainingBtn">Reload</button></div>
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead><tr><th>Title</th><th>Category</th><th>Company</th><th>Topic</th><th>Uploaded</th><th>File</th></tr></thead>
+                        <tbody id="trainingTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/ai_training.js"></script>
+</body>
+</html>

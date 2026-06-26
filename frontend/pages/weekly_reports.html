@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Weekly Reports</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body" data-report-type="weekly">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand-box">
+                    <div class="brand-logo">N</div>
+                    <div>
+                        <h2>NTPC BD Portal</h2>
+                        <p>Admin Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="nav-icon">D</span><span>Dashboard</span></a>
+                <a href="employees.html" class="nav-item"><span class="nav-icon">E</span><span>Employees</span></a>
+                <a href="bd_dashboard.html" class="nav-item"><span class="nav-icon">B</span><span>BD Dashboard</span></a>
+                <a href="upload.html" class="nav-item"><span class="nav-icon">U</span><span>Submit Data</span></a>
+                <a href="raw_documents.html" class="nav-item"><span class="nav-icon">R</span><span>Raw Data</span></a>
+                <a href="ai_training.html" class="nav-item"><span class="nav-icon">AI</span><span>AI Training</span></a>
+                <a href="weekly_reports.html" class="nav-item active"><span class="nav-icon">W</span><span>Weekly Reports</span></a>
+                <a href="monthly_reports.html" class="nav-item"><span class="nav-icon">M</span><span>Monthly Reports</span></a>
+                <a href="review.html" class="nav-item"><span class="nav-icon">R</span><span>Review / Analytics</span></a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Weekly BD Reports</h1>
+                    <p>Generate the weekly NTPC BD report from uploaded weekly data, then edit it exactly like a Word document.</p>
+                </div>
+                <div class="topbar-right">
+                    <a class="secondary-btn" href="monthly_reports.html">Monthly Format</a>
+                </div>
+            </header>
+
+            <!-- WEEKLY SOURCE SELECTION -->
+            <section class="panel-card report-source-panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Generate Weekly Report From Uploaded Raw Data</h3>
+                        <p class="muted-text">
+                            Select uploaded weekly BD raw data and generate the weekly report draft in the Word-style editor below.
+                        </p>
+                    </div>
+                    <button class="mini-btn" id="reloadUploadedDataBtn" type="button">Reload Uploads</button>
+                </div>
+
+                <div class="report-source-grid">
+                    <label>
+                        Week
+                        <select id="uploadedWeekFilter">
+                            <option value="">All Weeks</option>
+                            <option value="Week 1">Week 1</option>
+                            <option value="Week 2">Week 2</option>
+                            <option value="Week 3">Week 3</option>
+                            <option value="Week 4">Week 4</option>
+                            <option value="Week 5">Week 5</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Period Start
+                        <input type="date" id="weeklyPeriodStart" />
+                    </label>
+
+                    <label>
+                        Period End
+                        <input type="date" id="weeklyPeriodEnd" />
+                    </label>
+
+                    <label>
+                        Report Title
+                        <input type="text" id="weeklyReportTitle" value="SNAPSHOT OF BUSINESS DEVELOPMENT ACTIVITIES" />
+                    </label>
+                </div>
+
+                <div id="uploadedDataList" class="upload-selection-list"></div>
+
+                <div class="form-actions" style="margin-top: 16px;">
+                    <button class="primary-btn" id="useUploadedDataBtn" type="button">
+                        Generate Weekly Report From Selected Data
+                    </button>
+                </div>
+                <p class="inline-message" id="uploadedDataMessage"></p>
+            </section>
+
+            <!-- WORD STYLE REPORT EDITOR -->
+            <section class="panel-card word-report-panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Generated Weekly Report</h3>
+                        <p class="muted-text">Edit the report directly like a Word document.</p>
+                    </div>
+                    <div class="report-action-group">
+                        <button class="mini-btn" id="refreshPreviewBtn" type="button">Refresh</button>
+                        <button class="mini-btn" id="saveEditedReportBtn" type="button">Save Edited Report</button>
+                        <button class="mini-btn" id="exportPdfBtn" type="button">Save PDF</button>
+                        <button class="mini-btn" id="exportWordBtn" type="button">Save Word</button>
+                        <button class="mini-btn" id="exportExcelBtn" type="button">Save Excel</button>
+                    </div>
+                </div>
+
+                <!-- WORD TOOLBAR -->
+                <div class="word-toolbar" id="wordToolbar">
+                    <div class="toolbar-group">
+                        <button type="button" class="toolbar-btn" data-cmd="undo">Undo</button>
+                        <button type="button" class="toolbar-btn" data-cmd="redo">Redo</button>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <select id="fontNameSelect" class="toolbar-select">
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Calibri">Calibri</option>
+                            <option value="Cambria">Cambria</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Verdana">Verdana</option>
+                        </select>
+
+                        <select id="fontSizeSelect" class="toolbar-select">
+                            <option value="1">8</option>
+                            <option value="2">10</option>
+                            <option value="3" selected>12</option>
+                            <option value="4">14</option>
+                            <option value="5">18</option>
+                            <option value="6">24</option>
+                            <option value="7">32</option>
+                        </select>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <button type="button" class="toolbar-btn" data-cmd="bold"><b>B</b></button>
+                        <button type="button" class="toolbar-btn" data-cmd="italic"><i>I</i></button>
+                        <button type="button" class="toolbar-btn" data-cmd="underline"><u>U</u></button>
+                        <button type="button" class="toolbar-btn" data-cmd="strikeThrough"><s>S</s></button>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <label class="toolbar-color-wrap">
+                            A
+                            <input type="color" id="foreColorPicker" value="#000000" />
+                        </label>
+                        <label class="toolbar-color-wrap">
+                            H
+                            <input type="color" id="highlightColorPicker" value="#fff59d" />
+                        </label>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <select id="formatBlockSelect" class="toolbar-select">
+                            <option value="">Paragraph</option>
+                            <option value="H1">Heading 1</option>
+                            <option value="H2">Heading 2</option>
+                            <option value="H3">Heading 3</option>
+                            <option value="P">Paragraph</option>
+                            <option value="BLOCKQUOTE">Quote</option>
+                        </select>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <button type="button" class="toolbar-btn" data-cmd="justifyLeft">Left</button>
+                        <button type="button" class="toolbar-btn" data-cmd="justifyCenter">Center</button>
+                        <button type="button" class="toolbar-btn" data-cmd="justifyRight">Right</button>
+                        <button type="button" class="toolbar-btn" data-cmd="justifyFull">Justify</button>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <button type="button" class="toolbar-btn" data-cmd="insertUnorderedList">• List</button>
+                        <button type="button" class="toolbar-btn" data-cmd="insertOrderedList">1. List</button>
+                        <button type="button" class="toolbar-btn" data-cmd="outdent">Outdent</button>
+                        <button type="button" class="toolbar-btn" data-cmd="indent">Indent</button>
+                    </div>
+
+                    <div class="toolbar-group">
+                        <button type="button" class="toolbar-btn" id="insertHrBtn">Line</button>
+                        <button type="button" class="toolbar-btn" id="clearFormattingBtn">Clear</button>
+                    </div>
+                </div>
+
+                <!-- SEARCH BAR -->
+                <div class="report-search-strip">
+                    <input type="text" id="reportSearchInput" placeholder="Search in report..." />
+                    <button class="mini-btn" id="reportSearchBtn" type="button">Search</button>
+                    <button class="mini-btn" id="reportPrevBtn" type="button">Prev</button>
+                    <button class="mini-btn" id="reportNextBtn" type="button">Next</button>
+                    <button class="mini-btn" id="reportClearSearchBtn" type="button">Clear Search</button>
+                </div>
+
+                <!-- A4 WORD PAGE -->
+                <div class="word-editor-shell">
+                    <div class="word-page" id="reportEditor" contenteditable="true"></div>
+                </div>
+
+                <p class="inline-message" id="reportMessage"></p>
+            </section>
+
+            <!-- SAVED WEEKLY REPORTS -->
+            <section class="panel-card">
+                <div class="panel-header">
+                    <div>
+                        <h3>Saved Weekly Reports</h3>
+                        <p class="muted-text">Previously saved weekly reports generated from uploaded data.</p>
+                    </div>
+                    <button class="mini-btn" id="loadEntriesBtn" type="button">Reload</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Period</th>
+                                <th>Type</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entriesTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/report_manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>NTPC BD Portal - Submit Data</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-top">
+
+<div class="brand-box">
+
+<div class="brand-logo">N</div>
+
+<div>
+
+<h2>NTPC BD Portal</h2>
+
+<p>Business Development</p>
+
+</div>
+
+</div>
+
+</div>
+
+<nav class="sidebar-nav">
+
+<a href="employee_dashboard.html" class="nav-item">
+
+<span class="nav-icon">D</span>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="upload.html" class="nav-item active">
+
+<span class="nav-icon">U</span>
+
+<span>Submit Data</span>
+
+</a>
+
+<a href="raw_documents.html" class="nav-item">
+
+<span class="nav-icon">R</span>
+
+<span>Raw Data</span>
+
+</a>
+
+<a href="ai_training.html" class="nav-item">
+
+<span class="nav-icon">AI</span>
+
+<span>AI Training</span>
+
+</a>
+
+<a href="weekly_reports.html" class="nav-item">
+
+<span class="nav-icon">W</span>
+
+<span>Weekly Report</span>
+
+</a>
+
+<a href="monthly_reports.html" class="nav-item">
+
+<span class="nav-icon">M</span>
+
+<span>Monthly Report</span>
+
+</a>
+
+</nav>
+
+<div class="sidebar-footer">
+
+<button class="logout-btn" onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</aside>
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1>Business Development Data Submission</h1>
+
+<p>
+
+Upload source data for AI processing.
+
+Weekly and Monthly reports will be generated automatically.
+
+</p>
+
+</div>
+
+<div class="admin-chip">
+
+<div class="admin-avatar">
+
+<span id="uploadUserInitial">BD</span>
+
+</div>
+
+<div>
+
+<h4 id="uploadUserName">
+
+Employee
+
+</h4>
+
+<p>
+
+NTPC Business Development
+
+</p>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="panel-card">
+
+<div class="panel-header">
+
+<h2>
+
+Source Document
+
+</h2>
+
+</div>
+<form id="submissionForm" class="report-form">
+
+<div class="form-grid">
+
+<label>
+
+Company
+
+<select id="submitCompany" required>
+
+<option value="">Select Company</option>
+
+<option>Anushakti Vidyut Nigam Ltd (ASHWINI)</option>
+<option>Aravali Power Co. Pvt Ltd (APCPL)</option>
+<option>Bangladesh-india Friendship Power Co.Pvt.Ltd (BIFPCL)</option>
+<option>BF-NTPC Energy Systems Ltd (BFNESL)</option>
+<option>Bhartiya Rail Bijlee Co. Ltd (BRBCL)</option>
+<option>CIL NTPC Urja Pvt Ltd (CNUPL)</option>
+<option>Energy Efficiency Services Ltd (EESL)</option>
+<option>Hindustan Urvarak & Rasayan Ltd (HURL)</option>
+<option>International Coal Ventures Pvt Ltd (ICVL)</option>
+<option>Jhabua Power Ltd</option>
+<option>Meja Urja Nigam Pvt Ltd (MUNPL)</option>
+<option>National High Power Test Laboratory Pvt Ltd (NHPTL)</option>
+<option>North Eastern Electric Power Corporation Ltd. (NEEPCO)</option>
+<option>NTPC BHEL Power Projects Pvt Ltd (NBPPL)</option>
+<option>NTPC EDMC Waste Solutions Pvt. Limited (NEWS)</option>
+<option>NTPC Electric Supply Co.Ltd (NESCL)</option>
+<option>NTPC GE Power Services Pvt Ltd (NTPC-GE)</option>
+<option>NTPC Green Energy Ltd (NGEL)</option>
+<option>NTPC Mining Limited (NML)</option>
+<option>NTPC Parmanu Urja Nigam Limited</option>
+<option>NTPC SAIL Power Co. Pvt Ltd (NSPCL)</option>
+<option>NTPC Tamilnadu Energy Co. Ltd (NTECL)</option>
+<option>NTPC Vidyut Vyapar Nigam Ltd (NVVN)</option>
+<option>Patratu Vidyut Utpadan Nigam Ltd (PVUNL)</option>
+<option>Power Trading Corporation Ltd (PTC)</option>
+<option>Ratnagiri Gas and Power Pvt Ltd (RGPPL)</option>
+<option>THDC India Ltd. (THDC)</option>
+<option>Transformers and Electricals Kerala Ltd (TELK)</option>
+<option>Trincomalee Power Co.Ltd (TPCL)</option>
+<option>Utility Powertech Ltd (UPL)</option>
+<option>Sinnar Thermal Power Limited (STPL)</option>
+
+<option value="OTHER">Other...</option>
+
+</select>
+
+</label>
+
+<label id="otherCompanyDiv" style="display:none;">
+
+Other Company
+
+<input
+type="text"
+id="otherCompany"
+placeholder="Enter Company Name">
+
+</label>
+
+<label>
+
+Project Name
+
+<input
+type="text"
+id="submitProject"
+placeholder="Project Name"
+required>
+
+</label>
+
+<label>
+
+Period Start
+
+<input type="date" id="submitPeriodStart" required>
+
+</label>
+
+<label>
+
+Period End
+
+<input type="date" id="submitPeriodEnd" required>
+
+</label>
+
+<label>
+
+Week Label
+
+<select id="submitWeek">
+<option value="">Select Week</option>
+<option>Week 1</option>
+<option>Week 2</option>
+<option>Week 3</option>
+<option>Week 4</option>
+<option>Week 5</option>
+</select>
+
+</label>
+
+<label>
+
+Business Avenue
+
+<select id="submitSection"></select>
+
+</label>
+
+<label>
+
+Topic
+
+<input type="text" id="submitTopic" placeholder="Topic" required>
+
+</label>
+
+<label>
+
+Subtopic
+
+<input type="text" id="submitSubtopic" placeholder="Subtopic / workstream">
+
+</label>
+
+<label>
+
+Data Title
+
+<input
+type="text"
+id="submitDataTitle"
+placeholder="Data Title"
+required>
+
+</label>
+
+<label>
+
+Current Date
+
+<input
+type="text"
+id="currentDate"
+readonly>
+
+</label>
+
+<label>
+
+Current Time
+
+<input
+type="text"
+id="currentTime"
+readonly>
+
+</label>
+
+<label>
+
+Submitted By
+
+<input
+id="submitBy"
+readonly>
+
+</label>
+
+<label>
+
+Source Type
+
+<select id="submitSourceType">
+
+<option>File Upload</option>
+
+<option>Raw Text</option>
+
+<option>File + Raw Text</option>
+
+</select>
+
+</label>
+
+<label class="full-span">
+
+Upload Source Files
+
+<input
+
+id="submitFile"
+
+type="file"
+
+multiple
+
+accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt">
+
+</label>
+
+</div>
+
+<div style="margin-top:25px;">
+
+<h3>
+
+Source Information
+
+</h3>
+
+<div id="toolbar"></div>
+
+<div id="editor"
+
+style="height:500px;background:white;">
+
+</div>
+
+</div>
+
+<div class="form-actions" style="margin-top:25px;">
+
+<button
+
+type="button"
+
+class="secondary-btn"
+
+id="saveDraft">
+
+Save Draft
+
+</button>
+
+<button
+
+type="button"
+
+class="secondary-btn"
+
+id="generateAI">
+
+Generate AI Report
+
+</button>
+
+<button
+
+type="submit"
+
+class="primary-btn">
+
+Save Submission
+
+</button>
+
+</div>
+
+<p id="submissionMessage"></p>
+</form>
+
+</section>
+
+<section class="panel-card">
+
+<div class="panel-header">
+
+<h2>
+
+Instructions
+
+</h2>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<h4>1. Upload Source Data</h4>
+
+<p>
+
+Upload all supporting files, notes and information.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>2. AI Processing</h4>
+
+<p>
+
+Qwen AI will read every uploaded file and prepare the report draft.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>3. Edit Report</h4>
+
+<p>
+
+Review the generated report using the Word editor before saving.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>4. Generate Weekly / Monthly</h4>
+
+<p>
+
+Weekly and Monthly reports will automatically use the saved source documents.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<script>
+
+const quill=new Quill("#editor",{
+
+theme:"snow",
+
+modules:{
+
+toolbar:[
+
+[{header:[1,2,3,false]}],
+
+["bold","italic","underline","strike"],
+
+[{color:[]}],
+
+[{background:[]}],
+
+[{align:[]}],
+
+[{list:"ordered"},{list:"bullet"}],
+
+["blockquote","code-block"],
+
+["link","image"],
+
+["clean"]
+
+]
+
+}
+
+});
+
+window.quill=quill;
+
+function updateIndianTime(){
+
+const now=new Date();
+
+document.getElementById("currentDate").value=
+
+now.toLocaleDateString("en-IN",{
+
+timeZone:"Asia/Kolkata"
+
+});
+
+document.getElementById("currentTime").value=
+
+now.toLocaleTimeString("en-IN",{
+
+timeZone:"Asia/Kolkata"
+
+});
+
+}
+
+updateIndianTime();
+
+setInterval(updateIndianTime,1000);
+
+document
+
+.getElementById("submitCompany")
+
+.addEventListener("change",function(){
+
+document.getElementById("otherCompanyDiv").style.display=
+
+this.value==="OTHER"
+
+?
+
+"block"
+
+:
+
+"none";
+
+});
+
+</script>
+
+<script src="../js/dashboard.js"></script>
+
+<script src="../js/submission.js"></script>
+
+</body>
+
+</html>

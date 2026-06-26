@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Review</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top"><div class="brand-box"><div class="brand-logo">N</div><div><h2>NTPC BD Portal</h2><p>Review Desk</p></div></div></div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="nav-icon">D</span><span>Dashboard</span></a>
+                <a href="employees.html" class="nav-item"><span class="nav-icon">E</span><span>Employees</span></a>
+                <a href="upload.html" class="nav-item"><span class="nav-icon">U</span><span>Submit Data</span></a>
+                <a href="weekly_reports.html" class="nav-item"><span class="nav-icon">W</span><span>Weekly Reports</span></a>
+                <a href="monthly_reports.html" class="nav-item"><span class="nav-icon">M</span><span>Monthly Reports</span></a>
+                <a href="review.html" class="nav-item active"><span class="nav-icon">R</span><span>Review / Analytics</span></a>
+            </nav>
+            <div class="sidebar-footer"><button class="logout-btn" onclick="logout()">Logout</button></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Review / Analytics</h1>
+                    <p>Review uploaded data, edit extracted information, approve final entries, or remove incorrect submissions.</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="secondary-btn" id="reloadReviewBtn" type="button">Reload</button>
+                </div>
+            </header>
+
+            <section class="stats-grid review-stats">
+                <div class="stat-card green"><div class="stat-top"><span>Total Submissions</span></div><h2 id="reviewTotal">0</h2><p>All uploaded data records</p></div>
+                <div class="stat-card orange"><div class="stat-top"><span>Under Review</span></div><h2 id="reviewPending">0</h2><p>Awaiting admin decision</p></div>
+                <div class="stat-card blue"><div class="stat-top"><span>Approved</span></div><h2 id="reviewApproved">0</h2><p>Ready for final reports</p></div>
+            </section>
+
+            <section class="panel-card">
+                <div class="panel-header"><h3>Uploaded Data Review</h3></div>
+                <div id="reviewList" class="review-list"></div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/review.js"></script>
+</body>
+</html>

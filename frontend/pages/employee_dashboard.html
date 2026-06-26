@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTPC BD Portal - Employee Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand-box">
+                    <div class="brand-logo">N</div>
+                    <div>
+                        <h2>NTPC BD Portal</h2>
+                        <p>Employee Portal</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="employee_dashboard.html" class="nav-item active">
+                    <span class="nav-icon">D</span><span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <span class="nav-icon">U</span><span>Upload Data</span>
+                </a>
+                <a href="weekly_reports.html" class="nav-item">
+                    <span class="nav-icon">W</span><span>Weekly Report Generator</span>
+                </a>
+                <a href="monthly_reports.html" class="nav-item">
+                    <span class="nav-icon">M</span><span>Monthly Report Generator</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Employee Dashboard</h1>
+                    <p>View assigned companies, submit raw data, and track your report entries.</p>
+                </div>
+
+                <div class="admin-chip">
+                    <div class="admin-avatar" id="employeeInitial">E</div>
+                    <div>
+                        <h4 id="employeeName">Employee</h4>
+                        <p id="employeeRoleText">Approved employee access</p>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-panel">
+                <div class="hero-left">
+                    <h2>Submit project data and track your report work</h2>
+                    <p>
+                        Use this employee workspace to upload raw BD data, add project updates,
+                        and review all your submissions and assigned companies in one place.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="upload.html" class="primary-btn">Upload Data</a>
+                        <a href="weekly_reports.html" class="secondary-btn">Weekly Report</a>
+                        <a href="monthly_reports.html" class="secondary-btn">Monthly Report</a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-badge">
+                        <span>Employee Workspace</span>
+                        <h3 id="assignedCompanyCount">0 Assigned Companies</h3>
+                        <p>Your assigned companies and business areas are loaded from SQL.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-grid review-stats">
+                <div class="stat-card green">
+                    <div class="stat-top"><span>My Submissions</span></div>
+                    <h2 id="mySubmissions">0</h2>
+                    <p>Data records submitted by you</p>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-top"><span>Under Review</span></div>
+                    <h2 id="myPending">0</h2>
+                    <p>Waiting for admin review</p>
+                </div>
+
+                <div class="stat-card blue">
+                    <div class="stat-top"><span>Approved</span></div>
+                    <h2 id="myApproved">0</h2>
+                    <p>Accepted for final reports</p>
+                </div>
+            </section>
+
+            <section class="panel-card">
+                <div class="panel-header">
+                    <h3>Assigned Companies / Business Areas</h3>
+                    <button id="reloadEmployeeDashboard" class="mini-btn" type="button">Reload</button>
+                </div>
+
+                <div id="assignedCompanies" class="company-grid">
+                    <div class="empty-state-card">Loading assigned companies...</div>
+                </div>
+            </section>
+
+            <section class="panel-card">
+                <div class="panel-header">
+                    <h3>My Recent Uploads</h3>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Project / Topic</th>
+                                <th>Files</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeUploadsTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/employee_dashboard.js"></script>
+</body>
+</html>
