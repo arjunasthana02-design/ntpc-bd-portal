@@ -1,5 +1,9 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from sqlalchemy import text
 
@@ -100,7 +104,11 @@ app.include_router(dashboard_router)
 
 @app.get("/")
 def root():
+    return RedirectResponse(url="/pages/login.html")
 
+
+@app.get("/api/health")
+def health():
     return {
         "message": "NTPC BD Portal Backend Running",
         "version": "3.0",
@@ -114,3 +122,8 @@ def root():
             "Document Storage"
         ],
     }
+
+
+FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
