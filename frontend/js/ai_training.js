@@ -1,4 +1,4 @@
-const TRAINING_API = "http://127.0.0.1:8000";
+const TRAINING_API = ntpcApiBase();
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("trainingForm")?.addEventListener("submit", uploadTraining);

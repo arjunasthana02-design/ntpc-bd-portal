@@ -1,4 +1,4 @@
-const BD_API = "http://127.0.0.1:8000";
+const BD_API = ntpcApiBase();
 
 document.addEventListener("DOMContentLoaded", loadBdDashboard);
 

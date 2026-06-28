@@ -1,4 +1,4 @@
-const REVIEW_API = "http://127.0.0.1:8000/reports";
+const REVIEW_API = ntpcApiBase("/reports");
 let submissions = [];
 
 document.addEventListener("DOMContentLoaded", () => {

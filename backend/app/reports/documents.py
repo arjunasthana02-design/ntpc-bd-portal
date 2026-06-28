@@ -311,9 +311,13 @@ def create_document(payload: dict, db: Session = Depends(get_db)):
         project=payload.get("project") or "Business Development",
         report_type=payload.get("report_type") or "RAW",
         document_type=payload.get("document_type") or "REPORT",
+        period_start=payload.get("period_start"),
+        period_end=payload.get("period_end"),
         html_content=payload.get("html_content") or payload.get("html") or "",
         plain_text=payload.get("plain_text") or payload.get("text") or "",
         owner=payload.get("owner"),
+        source_submission_id=payload.get("source_submission_id"),
+        parent_document_id=payload.get("parent_document_id"),
         status=payload.get("status") or "Draft",
     )
     db.add(doc)

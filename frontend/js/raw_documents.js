@@ -1,4 +1,4 @@
-const RAW_API = "http://127.0.0.1:8000";
+const RAW_API = ntpcApiBase();
 
 let rawRows = [];
 let activeRawId = null;

@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000/reports";
+const API = ntpcApiBase("/reports");
 
 let quill = null;
 let currentDocumentId = null;
@@ -1051,48 +1051,6 @@ document.addEventListener(
     }
 
 );
-
-
-/* ===========================
-   QUILL EVENTS
-=========================== */
-
-quill.on(
-
-    "text-change",
-
-    debounce(
-
-        function(){
-
-            if(currentDocumentId){
-
-                setStatus("Editing...");
-
-            }
-
-        },
-
-        400
-
-    )
-
-);
-
-
-/* ===========================
-   AUTO SAVE
-=========================== */
-
-setInterval(function(){
-
-    if(currentDocumentId){
-
-        saveDocument(true);
-
-    }
-
-},10000);
 
 
 /* ===========================

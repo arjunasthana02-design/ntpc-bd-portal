@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = ntpcApiBase();
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginTab = document.getElementById("loginTab");

@@ -1,4 +1,4 @@
-const SUBMISSION_API = "http://127.0.0.1:8000";
+const SUBMISSION_API = ntpcApiBase();
 
 const SECTION_OPTIONS = [
     { code: "HURL", title: "HURL" },

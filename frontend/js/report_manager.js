@@ -1,4 +1,4 @@
-const REPORT_API = "http://127.0.0.1:8000";
+const REPORT_API = ntpcApiBase();
 
 (function () {
     const reportType = document.body.dataset.reportType || "weekly";

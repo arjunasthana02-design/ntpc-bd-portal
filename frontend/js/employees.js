@@ -1,4 +1,4 @@
-const EMPLOYEE_API = "http://127.0.0.1:8000/employees";
+const EMPLOYEE_API = ntpcApiBase("/employees");
 
 let employees = [];
 let editingEmployeeId = null;

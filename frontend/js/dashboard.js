@@ -1,4 +1,4 @@
-const DASHBOARD_API = "http://127.0.0.1:8000";
+const DASHBOARD_API = ntpcApiBase();
 
 document.addEventListener("DOMContentLoaded", () => {
     enforcePageAccess();

@@ -1,4 +1,4 @@
-const EMPLOYEE_DASHBOARD_API = "http://127.0.0.1:8000";
+const EMPLOYEE_DASHBOARD_API = ntpcApiBase();
 
 document.addEventListener("DOMContentLoaded", () => {
     const user = getCurrentUser();
